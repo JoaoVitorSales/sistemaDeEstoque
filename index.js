@@ -73,6 +73,19 @@ const main = async () => {
                     return soma + (valor * quantidade);
                 }, 0);
                 console.log(`O peso total de todos os produtos em estoque é: ${valorTotalPeso}kg`);
+            case 6:
+                const MediaTodosProdutos = await (0, controleEstoque_1.listarProdutos)();
+                const valorTotalProduto = MediaTodosProdutos.reduce((soma, produto) => {
+                    const valor = parseFloat(String(produto.valor));
+                    const quantidade = parseInt(String(produto.quantidade), 10);
+                    return soma + (valor * quantidade);
+                }, 0);
+                const PesoTotalProduto = MediaTodosProdutos.reduce((soma, produto) => {
+                    const quantidade = parseInt(String(produto.quantidade), 10);
+                    return soma + (quantidade);
+                }, 0);
+                const mediaPonderada = valorTotalProduto / PesoTotalProduto;
+                console.log(`A media do valor de todos os produtos em estoque é: R$${mediaPonderada}.2f,00`);
         }
     }
     catch (error) {
