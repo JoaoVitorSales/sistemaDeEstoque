@@ -129,8 +129,8 @@ const main = async () => {
                 break;
             
             case 8:
-                const pesoTotal = await listarProdutos();
-                const quantidadeTotal = pesoTotal.reduce((soma, produto) => {
+                const itemTotal = await listarProdutos();
+                const quantidadeTotal = itemTotal.reduce((soma, produto) => {
                     const quantidade = parseInt(String(produto.quantidade), 10);
 
                     return soma + (quantidade);
@@ -138,6 +138,9 @@ const main = async () => {
                 console.log(`A quantidade de produtos em estoque é: ${quantidadeTotal}`);
                 break;
             
+            case 9:
+                const itemEspecificosTotal = await listarProdutos();
+                console.log(`A quantidade de produtos em estoque é: ${itemEspecificosTotal.length}`);
     }
 }catch(error){
     console.error("Erro detectado:", error);
