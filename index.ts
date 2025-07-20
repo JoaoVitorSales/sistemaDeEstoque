@@ -66,15 +66,28 @@ const main = async () => {
             
             case 4:
                 const todosOsProdutos = await listarProdutos();
-                const valortotal = todosOsProdutos.reduce((soma, produto) => {
+                const valorTotal = todosOsProdutos.reduce((soma, produto) => {
 
                     const valor = parseFloat(String(produto.valor));
                     const quantidade = parseInt(String(produto.quantidade), 10);
 
                     return soma + (valor * quantidade);
                 }, 0);
-                console.log(`O valor total de todos os produtos em estoque é: R$${valortotal},00`);
+                console.log(`O valor total de todos os produtos em estoque é: R$${valorTotal},00`);
 
+                break;
+
+            case 5:
+                const pesoProdutos = await listarProdutos();
+                const valorTotalPeso = pesoProdutos.reduce((soma, produto) => {
+
+                    const valor = parseFloat(String(produto.peso));
+                    const quantidade = parseInt(String(produto.quantidade), 10);
+
+                    return soma + (valor * quantidade);
+                }, 0);
+                console.log(`O peso total de todos os produtos em estoque é: ${valorTotalPeso}kg`);
+            
     }
 }catch(error){
     console.error("Erro detectado:", error);
