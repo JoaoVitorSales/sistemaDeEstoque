@@ -1,36 +1,29 @@
-import { Data } from './model/interfaceData';
-import { adicionarProdutos } from './controller/controleEstoque';
-
-const escrever = require('prompt-sync')({sigint: true});
-
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const controleEstoque_1 = require("./controller/controleEstoque");
+const escrever = require('prompt-sync')({ sigint: true });
 const main = async () => {
     try {
         var w = escrever('Digite a ação desejada: ');
         var acao = parseInt(w, 10);
-
-        switch(acao){
+        switch (acao) {
             case 1:
-
                 var x = escrever('Digite o nome do produto: ');
                 var y = escrever('Digite o peso do produto: ');
                 var z = escrever('Digite o valor do produto: ');
                 var q = escrever('Digite a quantidade do produto: ');
-
                 const estoque = {
                     nome: x,
                     peso: parseFloat(y),
                     valor: parseFloat(z),
                     quantidade: parseInt(q, 10)
-                } as Data
-
-                await adicionarProdutos(estoque);
+                };
+                await (0, controleEstoque_1.adicionarProdutos)(estoque);
                 break;
-            case 2:
-
+        }
     }
-}catch(error){
-    console.error("Erro detectado:", error);
-}}
+    catch (error) {
+        console.error("Erro detectado:", error);
+    }
+};
 main();
-
