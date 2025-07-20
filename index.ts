@@ -127,7 +127,16 @@ const main = async () => {
                 const mediaPeso = pesoMediaProduto / quantidadeMediaProduto;
                 console.log(`A media do peso de todos os produtos em estoque é: ${mediaPeso}kg`);
                 break;
+            
+            case 8:
+                const pesoTotal = await listarProdutos();
+                const quantidadeTotal = pesoTotal.reduce((soma, produto) => {
+                    const quantidade = parseInt(String(produto.quantidade), 10);
 
+                    return soma + (quantidade);
+                }, 0);
+                console.log(`A quantidade de produtos em estoque é: ${quantidadeTotal}`);
+                break;
             
     }
 }catch(error){
