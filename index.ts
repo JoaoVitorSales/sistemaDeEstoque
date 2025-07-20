@@ -1,5 +1,5 @@
 import { Data } from './model/interfaceData';
-import { adicionarProdutos } from './controller/controleEstoque';
+import { adicionarProdutos, removerProduto, listarProdutos } from './controller/controleEstoque';
 
 const escrever = require('prompt-sync')({sigint: true});
 
@@ -26,7 +26,27 @@ const main = async () => {
 
                 await adicionarProdutos(estoque);
                 break;
+
             case 2:
+
+                var nomeRemover = escrever('Digite o nome do produto: ');
+                await removerProduto(nomeRemover);
+                break;
+            
+            case 3:
+                const todosProdutos = await listarProdutos();
+                if(todosProdutos.length == 0){
+                    console.log("Estoque vazio");
+                }else{
+                    todosProdutos.forEach((produto) => {
+                        console.log(`----------------------------------------`)
+                        console.log(`Nome:  ${produto.nome}`);
+                        console.log(`Valor: R$ ${produto.peso}`);
+                        console.log(`Peso:  ${produto.valor}g`);
+                        console.log(`Quantidade: ${produto.quantidade}`);
+                        console.log(`----------------------------------------\n`)
+                    })
+                }
 
     }
 }catch(error){

@@ -20,6 +20,25 @@ const main = async () => {
                 };
                 await (0, controleEstoque_1.adicionarProdutos)(estoque);
                 break;
+            case 2:
+                var nomeRemover = escrever('Digite o nome do produto: ');
+                await (0, controleEstoque_1.removerProduto)(nomeRemover);
+                break;
+            case 3:
+                const todosProdutos = await (0, controleEstoque_1.listarProdutos)();
+                if (todosProdutos.length == 0) {
+                    console.log("Estoque vazio");
+                }
+                else {
+                    todosProdutos.forEach((produto) => {
+                        console.log(`----------------------------------------`);
+                        console.log(`Nome:  ${produto.nome}`);
+                        console.log(`Valor: R$ ${produto.peso}`);
+                        console.log(`Peso:  ${produto.valor}g`);
+                        console.log(`Quantidade: ${produto.quantidade}`);
+                        console.log(`----------------------------------------\n`);
+                    });
+                }
         }
     }
     catch (error) {
