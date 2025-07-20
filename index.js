@@ -55,6 +55,15 @@ const main = async () => {
                         console.log(`----------------------------------------\n`);
                     });
                 }
+                break;
+            case 4:
+                const todosOsProdutos = await (0, controleEstoque_1.listarProdutos)();
+                const valortotal = todosOsProdutos.reduce((soma, produto) => {
+                    const valor = parseFloat(String(produto.valor));
+                    const quantidade = parseInt(String(produto.quantidade), 10);
+                    return soma + (valor * quantidade);
+                }, 0);
+                console.log(`O valor total de todos os produtos em estoque é: R$${valortotal},00`);
         }
     }
     catch (error) {
