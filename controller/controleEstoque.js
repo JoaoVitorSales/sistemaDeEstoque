@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.adicionarProdutos = adicionarProdutos;
 exports.removerProduto = removerProduto;
+exports.obterProduto = obterProduto;
 exports.listarProdutos = listarProdutos;
 const serviceEstoque_1 = require("../service/serviceEstoque");
 async function adicionarProdutos(data) {
@@ -10,7 +11,6 @@ async function adicionarProdutos(data) {
         console.log("Produto adicionado com sucesso.");
     }
     catch (error) {
-        console.error("Erro ao adicionar produto:", error);
         throw error;
     }
 }
@@ -20,7 +20,15 @@ async function removerProduto(nome) {
         console.log("Produto removido com sucesso.");
     }
     catch (error) {
-        console.error("Erro ao remover produto:", error);
+        throw error;
+    }
+}
+async function obterProduto(nome) {
+    try {
+        const produto = await serviceEstoque_1.estoqueService.buscarNome(nome);
+        return produto;
+    }
+    catch (error) {
         throw error;
     }
 }
@@ -30,7 +38,6 @@ async function listarProdutos() {
         return todosProdutos;
     }
     catch (error) {
-        console.error("Erro ao puxar a lista de todos os produtos:", error);
         throw error;
     }
 }

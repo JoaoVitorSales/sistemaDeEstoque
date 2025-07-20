@@ -1,5 +1,5 @@
 import { Data } from './model/interfaceData';
-import { adicionarProdutos, removerProduto, listarProdutos } from './controller/controleEstoque';
+import { adicionarProdutos, removerProduto, listarProdutos, obterProduto } from './controller/controleEstoque';
 
 const escrever = require('prompt-sync')({sigint: true});
 
@@ -29,8 +29,23 @@ const main = async () => {
 
             case 2:
 
-                var nomeRemover = escrever('Digite o nome do produto: ');
-                await removerProduto(nomeRemover);
+                var nomeBuscar = escrever('Digite o nome do produto: ');
+                const produtoEncontrado = await obterProduto(nomeBuscar);
+                if(!produtoEncontrado){
+                    console.log("Produto não encontrado");
+                }else{
+                    console.log(`Nome:  ${produtoEncontrado.nome}`);
+                    console.log(`Valor: R$ ${produtoEncontrado.peso}`);
+                    console.log(`Peso:  ${produtoEncontrado.valor}g`);
+                    console.log(`Quantidade: ${produtoEncontrado.quantidade}`);
+                    const confirmar = escrever("tem certeza que quer excluir o arquivo(y/n): ");
+                    if(confirmar == 'y'){
+                    await removerProduto(nomeBuscar);
+                    }else{
+                        console.log("ação cancelada");
+                    }
+                }
+                
                 break;
             
             case 3:

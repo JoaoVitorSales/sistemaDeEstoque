@@ -21,8 +21,24 @@ const main = async () => {
                 await (0, controleEstoque_1.adicionarProdutos)(estoque);
                 break;
             case 2:
-                var nomeRemover = escrever('Digite o nome do produto: ');
-                await (0, controleEstoque_1.removerProduto)(nomeRemover);
+                var nomeBuscar = escrever('Digite o nome do produto: ');
+                const produtoEncontrado = await (0, controleEstoque_1.obterProduto)(nomeBuscar);
+                if (!produtoEncontrado) {
+                    console.log("Produto não encontrado");
+                }
+                else {
+                    console.log(`Nome:  ${produtoEncontrado.nome}`);
+                    console.log(`Valor: R$ ${produtoEncontrado.peso}`);
+                    console.log(`Peso:  ${produtoEncontrado.valor}g`);
+                    console.log(`Quantidade: ${produtoEncontrado.quantidade}`);
+                    const confirmar = escrever("tem certeza que quer excluir o arquivo(y/n): ");
+                    if (confirmar == 'y') {
+                        await (0, controleEstoque_1.removerProduto)(nomeBuscar);
+                    }
+                    else {
+                        console.log("ação cancelada");
+                    }
+                }
                 break;
             case 3:
                 const todosProdutos = await (0, controleEstoque_1.listarProdutos)();

@@ -13,6 +13,11 @@ class EstoqueService {
         produtosAtuais.push(data);
         await (0, writeCSV_1.writeCSV)(filePath, produtosAtuais);
     }
+    async buscarNome(nome) {
+        const produtosNoSistema = await (0, readCSV_1.readCSV)(filePath);
+        const sistemaAtualizado = produtosNoSistema.find((produto) => nome === produto.nome);
+        return sistemaAtualizado;
+    }
     async remover(nomeProduto) {
         const produtosNoSistema = await (0, readCSV_1.readCSV)(filePath);
         const sistemaAtualizado = produtosNoSistema.filter((produto) => produto.nome !== nomeProduto);

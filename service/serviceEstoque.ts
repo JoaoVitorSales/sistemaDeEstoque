@@ -15,6 +15,13 @@ export class EstoqueService{
         await writeCSV(filePath, produtosAtuais );
     }
 
+    async buscarNome(nome:String){
+        const produtosNoSistema = await readCSV(filePath);
+        const sistemaAtualizado = produtosNoSistema.find((produto) => nome === produto.nome);
+        return sistemaAtualizado;
+        
+    }
+
     async remover(nomeProduto: string){
         const produtosNoSistema = await readCSV(filePath);
         const sistemaAtualizado = produtosNoSistema.filter((produto) => produto.nome !== nomeProduto);
@@ -27,6 +34,7 @@ export class EstoqueService{
     async listar(){
         return await readCSV(filePath);
     }
+
 }
 
 export const estoqueService = new EstoqueService();
