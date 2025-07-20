@@ -4,6 +4,15 @@ const controleEstoque_1 = require("./controller/controleEstoque");
 const escrever = require('prompt-sync')({ sigint: true });
 const main = async () => {
     try {
+        console.log(`1.Adicionar item ao inventario
+            2. Remover item do inventario
+            3. listar Itens do inventario
+            4. Valor total do inventario
+            5. Peso total do inventario
+            6. Media de valor dos itens
+            7. Media de peso dos itens
+            8. Quantidade total de itens
+            9. Quantidade de item especificos`);
         var w = escrever('Digite a ação desejada: ');
         var acao = parseInt(w, 10);
         switch (acao) {
