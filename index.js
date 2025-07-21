@@ -4,7 +4,8 @@ const controleEstoque_1 = require("./controller/controleEstoque");
 const escrever = require('prompt-sync')({ sigint: true });
 const main = async () => {
     try {
-        console.log(`1.Adicionar item ao inventario
+        console.log(`
+            1.Adicionar item ao inventario
             2. Remover item do inventario
             3. listar Itens do inventario
             4. Valor total do inventario
@@ -18,16 +19,22 @@ const main = async () => {
         switch (acao) {
             case 1:
                 var x = escrever('Digite o nome do produto: ');
-                var y = escrever('Digite o peso do produto: ');
-                var z = escrever('Digite o valor do produto: ');
-                var q = escrever('Digite a quantidade do produto: ');
-                const estoque = {
-                    nome: x,
-                    peso: parseFloat(y),
-                    valor: parseFloat(z),
-                    quantidade: parseInt(q, 10)
-                };
-                await (0, controleEstoque_1.adicionarProdutos)(estoque);
+                const verificarExistenciaNome = await (0, controleEstoque_1.obterProduto)(x);
+                if (verificarExistenciaNome) {
+                    console.log("nome já existe");
+                }
+                else {
+                    var y = escrever('Digite o peso do produto: ');
+                    var z = escrever('Digite o valor do produto: ');
+                    var q = escrever('Digite a quantidade do produto: ');
+                    const estoque = {
+                        nome: x,
+                        peso: parseFloat(y),
+                        valor: parseFloat(z),
+                        quantidade: parseInt(q, 10)
+                    };
+                    await (0, controleEstoque_1.adicionarProdutos)(estoque);
+                }
                 break;
             case 2:
                 var nomeBuscar = escrever('Digite o nome do produto: ');

@@ -23,18 +23,23 @@ const main = async () => {
             case 1:
 
                 var x = escrever('Digite o nome do produto: ');
-                var y = escrever('Digite o peso do produto: ');
-                var z = escrever('Digite o valor do produto: ');
-                var q = escrever('Digite a quantidade do produto: ');
+                const verificarExistenciaNome = await obterProduto(x);
+                if(verificarExistenciaNome){
+                    console.log("nome já existe");
+                }else{
+                    var y = escrever('Digite o peso do produto: ');
+                    var z = escrever('Digite o valor do produto: ');
+                    var q = escrever('Digite a quantidade do produto: ');
 
-                const estoque = {
-                    nome: x,
-                    peso: parseFloat(y),
-                    valor: parseFloat(z),
-                    quantidade: parseInt(q, 10)
-                } as Data
+                    const estoque = {
+                        nome: x,
+                        peso: parseFloat(y),
+                        valor: parseFloat(z),
+                        quantidade: parseInt(q, 10)
+                    } as Data
 
-                await adicionarProdutos(estoque);
+                    await adicionarProdutos(estoque);
+                }
                 break;
 
             case 2:
